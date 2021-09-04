@@ -1,0 +1,38 @@
+[package]
+authors = ["Michael Zill <michael.zill@gmail.com"]
+description = "NeoPixel Demo for the Adafruit feather f405"
+edition = "2018"
+license = "MIT OR Apache-2.0"
+name = "feather-f405-neopixel"
+version = "0.1.0"
+
+[dependencies]
+cortex-m = {version = "0.7"}
+cortex-m-rt = {version = "0.6"}
+embedded-hal = "0.2"
+feather-f405 = {git = "https://github.com/jkristell/feather-f405.git", rev = "95461b1"}
+panic-rtt-target = {version = "0.1.2", features = ["cortex-m"]}
+rtt-target = {version = "0.3.1", features = ["cortex-m"]}
+smart-leds = "0.3"
+stm32f4xx-hal = {version = "0.9", features = ["rt", "stm32f405", "usb_fs", "sdio"]}
+ws2812-timer-delay = "0.3"
+
+# this lets you use `cargo fix`!
+[[bin]]
+bench = false
+name = "feather-f405-neopixel"
+test = false
+
+[profile.release]
+codegen-units = 1 # better optimizations
+debug = true # symbols are nice and they don't increase the size on Flash
+incremental = false 
+lto = true # better optimizations
+opt-level = 's' 
+
+[profile.dev]
+codegen-units = 1
+debug = true
+incremental = false
+lto = true
+opt-level = 0
